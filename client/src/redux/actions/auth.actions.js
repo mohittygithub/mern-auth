@@ -9,6 +9,13 @@ export const login = (token) => async (dispatch) => {
   });
 };
 
+// logout action
+export const logout = () => async (dispatch) => {
+  dispatch({
+    type: actionTypes.LOGOUT_USER,
+  });
+};
+
 /*signup action
 export const signup = (name, email, password) => async (dispatch) => {
   const data = { name, email, password };

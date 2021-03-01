@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { login } from "../redux/actions/auth.actions";
+import { login, logout } from "../redux/actions/auth.actions";
 import signin from "../components/signin.component";
 
 const Signin = (props) => {
   const dispatch = useDispatch();
+  const stateJwt = useSelector((state) => state.authReducer.jwt);
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -28,6 +29,14 @@ const Signin = (props) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
+  // logout method
+  const logout = (e) => {
+    e.preventDefault();
+    console.log("hi");
+    // localStorage.clear();
+    // dispatch(logout());
+    console.log(stateJwt);
+  };
   return (
     <>
       <h2>Sign in to your account!</h2>
@@ -51,6 +60,7 @@ const Signin = (props) => {
         <button type="submit">Sign in</button>
       </form>
       <br />
+      <button onClick={(e) => logout}>Logout</button>
       <h6>
         Don't have an account? <Link to="/signup">Create Account</Link>
       </h6>
