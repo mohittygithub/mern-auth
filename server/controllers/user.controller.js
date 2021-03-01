@@ -40,7 +40,7 @@ exports.signup = async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
     const isUserExists = await User.findOne({ email: email });
-    if (isUserExists) return res.json({ message: "Email already exists" });
+    if (isUserExists) return res.json({ error: "Email already exists" });
 
     const encryptedPassword = await bcrypt.hash(req.body.password, 10);
     const user = new User({
@@ -53,7 +53,7 @@ exports.signup = async (req, res, next) => {
 
     res.status(201).json({
       success: true,
-      message: "New user created",
+      message: "Account created successfully.",
       results: {
         id: createdUser._id,
         name: createdUser.name,
