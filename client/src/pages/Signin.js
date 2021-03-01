@@ -2,36 +2,37 @@ import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "../redux/actions/auth.actions";
+import signin from "../components/signin.component";
 
 const Signin = (props) => {
   const dispatch = useDispatch();
-  const jwt = useSelector((state) => state.authReducer.jwt);
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
-  const handleSubmit = (e) => {
+  const [token, setToken] = useState("");
+
+  // handlesubmit method
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(loginData);
-
-    dispatch(login(loginData.email, loginData.password));
-
-    console.log("response = ", jwt);
+    const response = await signin(loginData.email, loginData.password);
+    // console.log("response = ", response);
+    setToken(response.data.jwt);
+    localStorage.setItem("jwt", token);
+    dispatch(login(token));
   };
+
+  // handleChange method
   const handleChange = (e) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
+
   return (
     <>
       <h2>Sign in to your account!</h2>
 
       <form onSubmit={(e) => handleSubmit(e)}>
-        {/* <input
-          type="text"
-          name="name"
-          placeholder="name"
-          onChange={(e) => handleChange(e)}
-        /> */}
         <input
           type="email"
           name="email"
@@ -51,7 +52,7 @@ const Signin = (props) => {
       </form>
       <br />
       <h6>
-        {/* Don't have an account? <Link to="/signup">Create Account</Link> */}
+        Don't have an account? <Link to="/signup">Create Account</Link>
       </h6>
     </>
   );

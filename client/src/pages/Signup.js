@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { signup } from "../redux/actions/auth.actions";
+import { Link } from "react-router-dom";
+import signup from "../components/signup.component";
 
 const Signup = (props) => {
   const [signupData, setSignupData] = useState({
@@ -10,22 +10,18 @@ const Signup = (props) => {
     confirmPassword: "",
   });
 
-  const response = useSelector((state) => state.authReducer.error);
-  const dispatch = useDispatch();
-
   const handleChange = (e) => {
     setSignupData({ ...signupData, [e.target.name]: e.target.value });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (signupData.password !== signupData.confirmPassword) {
       alert("Passwords did not match");
-    } else {
-      const { name, email, password } = signupData;
-      dispatch(signup(name, email, password));
     }
-    console.log(response);
+
+    const response = await signup(signupData);
+    console.log("response = ", response.data.message);
   };
 
   return (
@@ -65,7 +61,7 @@ const Signup = (props) => {
       </form>
       <br />
       <h6>
-        {/* Don't have an account? <Link to="/signup">Create Account</Link> */}
+        Don't have an account? <Link to="/signin">Create Account</Link>
       </h6>
     </>
   );
