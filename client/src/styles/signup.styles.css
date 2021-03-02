@@ -1,10 +1,31 @@
-.signup {
+html,
+body {
+  background: #f2f4f8;
+  border: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.signup,
+.signin {
   margin: auto;
 }
 .heading {
   margin-bottom: 40px;
   text-align: center;
 }
-.alert {
-  margin-top: 20px;
+.members {
+  display: flex;
+}
+.form-border {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 600px;
+  width: 600px;
+  border-radius: 10px;
+
+  /* border: 1px solid #bfbfbf; */
+  background-color: rgb(255, 255, 255);
+  box-shadow: 10px 10px 5px #aaaaaa;
 }

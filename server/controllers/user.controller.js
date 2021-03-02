@@ -12,8 +12,7 @@ exports.signin = async (req, res, next) => {
     const user = await User.findOne({ email: email });
 
     // checking if email is stored in DB
-    if (!user)
-      res.status(401).json({ success: false, message: "Auth failed 1" });
+    if (!user) res.json({ error: "Error while logging in" });
 
     // comparing the passwords
     const comparePasswords = await bcrypt.compare(
@@ -21,8 +20,7 @@ exports.signin = async (req, res, next) => {
       user.password
     );
 
-    if (!comparePasswords)
-      res.status(401).json({ success: false, message: "Auth failed 2" });
+    if (!comparePasswords) res.json({ error: "Incorrect credentials" });
 
     // generating jwt
     const token = await jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
@@ -38,7 +36,9 @@ exports.signin = async (req, res, next) => {
 // signup controller
 exports.signup = async (req, res, next) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, confirmPassword } = req.body;
+    if (password !== confirmPassword)
+      return res.json({ error: "Passwords mismatch" });
     const isUserExists = await User.findOne({ email: email });
     if (isUserExists) return res.json({ error: "Email already exists" });
 

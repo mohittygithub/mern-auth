@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Button } from "reactstrap";
+import { Alert, Toast, ToastBody, ToastHeader } from "reactstrap";
+import "../styles/signup.styles.css";
 import signin from "../components/signin.component";
 
 const Signin = (props) => {
@@ -10,16 +11,25 @@ const Signin = (props) => {
     password: "",
   });
   const [token, setToken] = useState("");
+  const [error, setError] = useState("");
+  const [visible, setVisible] = useState(false);
 
   // handlesubmit method
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setVisible(false);
+    setError("");
 
     const response = await signin(loginData.email, loginData.password);
-
-    setToken(response.data.jwt);
-    setLoginData({ email: "", password: "" });
-    history.push("/");
+    if (response.data.error) {
+      setError(response.data.error);
+      setVisible(true);
+    }
+    if (response.data.jwt) {
+      setToken(response.data.jwt);
+      setLoginData({ email: "", password: "" });
+      history.push("/");
+    }
   };
 
   // useEffect method to capture the value of token
@@ -34,35 +44,65 @@ const Signin = (props) => {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
+  // onDismiss method for Alert
+  const onDismiss = () => {
+    setVisible(false);
+    setError("");
+  };
+
   return (
     <>
-      <h2>Sign in to your account!</h2>
+      <div className="signin col-md-6">
+        <div className="form-border row">
+          <form onSubmit={(e) => handleSubmit(e)} className="col-md-8">
+            <h2 className="heading">Sign in</h2>
+            <div className="alert col-md-8"></div>
+            <div className="form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="email"
+                value={loginData.email}
+                className="form-control"
+                autoComplete="on"
+                required
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
+            <div className="form-group">
+              <label>Password</label>
+              <input
+                type="password"
+                name="password"
+                className="form-control"
+                value={loginData.password}
+                placeholder="password"
+                required
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
 
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <input
-          type="email"
-          name="email"
-          placeholder="email"
-          autoComplete="on"
-          required
-          onChange={(e) => handleChange(e)}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="password"
-          required
-          onChange={(e) => handleChange(e)}
-        />
-        <Button color="primary" type="submit">
-          Sign in
-        </Button>
-      </form>
-      <br />
-
-      <h4>
-        Don't have an account? <Link to="/signup">Create Account</Link>
-      </h4>
+            <button className="btn btn-primary col-md-4" type="submit">
+              Sign in
+            </button>
+            <span className="col-md-8">
+              No account? <Link to="/signup">Sign up</Link>
+            </span>
+          </form>
+          {error && (
+            <Alert
+              className="row col-md-8"
+              color="danger"
+              isOpen={visible}
+              toggle={onDismiss}
+              fade={false}
+            >
+              {error}
+            </Alert>
+          )}
+        </div>
+      </div>
     </>
   );
 };
