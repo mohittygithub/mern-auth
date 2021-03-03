@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { Alert, Toast, ToastBody, ToastHeader } from "reactstrap";
 import "../styles/signup.styles.css";
 import signin from "../components/signin.component";
+import { login } from "../utils";
 
 const Signin = (props) => {
   let history = useHistory();
@@ -23,6 +24,7 @@ const Signin = (props) => {
     const response = await signin(loginData.email, loginData.password);
     if (response.data.error) {
       setError(response.data.error);
+      console.log(error);
       setVisible(true);
     }
     if (response.data.jwt) {
@@ -35,7 +37,7 @@ const Signin = (props) => {
   // useEffect method to capture the value of token
   useEffect(() => {
     //console.log(token)
-    localStorage.setItem("jwt", token);
+    login(token);
     // console.log(localStorage.getItem('jwt'))
   }, [token]);
 
@@ -90,17 +92,17 @@ const Signin = (props) => {
               No account? <Link to="/signup">Sign up</Link>
             </span>
           </form>
-          {error && (
-            <Alert
-              className="row col-md-8"
-              color="danger"
-              isOpen={visible}
-              toggle={onDismiss}
-              fade={false}
-            >
-              {error}
-            </Alert>
-          )}
+          <div>
+            {error && (
+              <Alert
+                className="row col-md-8"
+                color="danger"
+                isOpen={visible}
+                toggle={onDismiss}
+                fade={false}
+              />
+            )}
+          </div>
         </div>
       </div>
     </>

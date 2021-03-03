@@ -37,10 +37,12 @@ exports.signin = async (req, res, next) => {
 exports.signup = async (req, res, next) => {
   try {
     const { name, email, password, confirmPassword } = req.body;
-    if (password !== confirmPassword)
-      return res.json({ error: "Passwords mismatch" });
+
     const isUserExists = await User.findOne({ email: email });
     if (isUserExists) return res.json({ error: "Email already exists" });
+
+    if (password !== confirmPassword)
+      return res.json({ error: "Passwords mismatch" });
 
     const encryptedPassword = await bcrypt.hash(req.body.password, 10);
     const user = new User({
