@@ -27,7 +27,12 @@ exports.signin = async (req, res, next) => {
       expiresIn: "1d",
     });
 
-    res.status(200).json({ success: true, jwt: token });
+    res.status(200).json({
+      success: true,
+      jwt: token,
+      name: user.name,
+      email: user.email,
+    });
   } catch (error) {
     res.status(401).json({ success: false, error: error.message });
   }

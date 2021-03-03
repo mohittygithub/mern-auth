@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Alert } from "reactstrap";
-import "../styles/signup.styles.css";
+import "../styles/styles.css";
 
 import signup from "../components/signup.component";
 import { Label } from "reactstrap";
@@ -117,33 +117,31 @@ const Signup = (props) => {
           <span className="col-md-8 ">
             Have an account? <Link to="/signin">Sign in</Link>
           </span>
+          <div className="col-md-12">
+            {error && (
+              <Alert
+                className="row alert"
+                color="danger"
+                isOpen={visible}
+                toggle={onDismiss}
+                fade={false}
+              >
+                {error}
+              </Alert>
+            )}
+            {message && (
+              <Alert
+                className="alert"
+                color="primary"
+                isOpen={visible}
+                toggle={onDismiss}
+                fade={false}
+              >
+                {message}
+              </Alert>
+            )}
+          </div>
         </form>
-        {error && (
-          <div>
-            <Alert
-              className="row col-md-8"
-              color="danger"
-              isOpen={visible}
-              toggle={onDismiss}
-              fade={false}
-            >
-              {error}
-            </Alert>
-          </div>
-        )}
-        {message && (
-          <div>
-            <Alert
-              className="row col-md-8"
-              color="primary"
-              isOpen={visible}
-              toggle={onDismiss}
-              fade={false}
-            >
-              {message}
-            </Alert>
-          </div>
-        )}
       </div>
     </div>
   );

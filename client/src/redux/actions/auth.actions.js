@@ -2,10 +2,10 @@ import axios from "axios";
 import { actionTypes } from "./action.types";
 
 // login action
-export const login = (token) => async (dispatch) => {
+export const redux_login = (token, name, email) => async (dispatch) => {
   dispatch({
     type: actionTypes.SIGNIN_SUCCESS,
-    payload: token,
+    payload: { token, name, email },
   });
 };
 

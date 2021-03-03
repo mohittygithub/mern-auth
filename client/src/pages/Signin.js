@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { Alert, Toast, ToastBody, ToastHeader } from "reactstrap";
-import "../styles/signup.styles.css";
+import { Alert } from "reactstrap";
+import "../styles/styles.css";
 import signin from "../components/signin.component";
 import { login } from "../utils";
+import { redux_login } from "../redux/actions/auth.actions";
 
 const Signin = (props) => {
   let history = useHistory();
+  const dispatch = useDispatch();
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
@@ -28,8 +31,12 @@ const Signin = (props) => {
       setVisible(true);
     }
     if (response.data.jwt) {
+      console.log(response.data);
       setToken(response.data.jwt);
       setLoginData({ email: "", password: "" });
+      dispatch(
+        redux_login(response.data.jwt, response.data.name, response.data.email)
+      );
       history.push("/");
     }
   };
@@ -91,18 +98,20 @@ const Signin = (props) => {
             <span className="col-md-8">
               No account? <Link to="/signup">Sign up</Link>
             </span>
+            <div className="col-md-12">
+              {error && (
+                <Alert
+                  className="row alert"
+                  color="danger"
+                  isOpen={visible}
+                  toggle={onDismiss}
+                  fade={false}
+                >
+                  {error}
+                </Alert>
+              )}
+            </div>
           </form>
-          <div>
-            {error && (
-              <Alert
-                className="row col-md-8"
-                color="danger"
-                isOpen={visible}
-                toggle={onDismiss}
-                fade={false}
-              />
-            )}
-          </div>
         </div>
       </div>
     </>
