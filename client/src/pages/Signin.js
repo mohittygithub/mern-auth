@@ -1,20 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { Alert } from "reactstrap";
 import "../styles/styles.css";
 import signin from "../components/signin.component";
 import { login } from "../utils";
-import { redux_login } from "../redux/actions/auth.actions";
+// import { redux_login } from "../redux/actions/auth.actions";
 
 const Signin = (props) => {
   let history = useHistory();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
-  const [token, setToken] = useState("");
+  const [values, setValues] = useState({ name: "", email: "", jwt: "" });
   const [error, setError] = useState("");
   const [visible, setVisible] = useState(false);
 
@@ -32,11 +32,16 @@ const Signin = (props) => {
     }
     if (response.data.jwt) {
       console.log(response.data);
-      setToken(response.data.jwt);
+      setValues({
+        name: response.data.name,
+        email: response.data.email,
+        jwt: response.data.jwt,
+      });
+      console.log(("setValues = ", values));
       setLoginData({ email: "", password: "" });
-      dispatch(
-        redux_login(response.data.jwt, response.data.name, response.data.email)
-      );
+      // dispatch(
+      //   redux_login(response.data.jwt, response.data.name, response.data.email)
+      // );
       history.push("/");
     }
   };
@@ -44,9 +49,9 @@ const Signin = (props) => {
   // useEffect method to capture the value of token
   useEffect(() => {
     //console.log(token)
-    login(token);
+    login(values.name, values.email, values.jwt);
     // console.log(localStorage.getItem('jwt'))
-  }, [token]);
+  }, [values]);
 
   // handleChange method
   const handleChange = (e) => {
@@ -91,13 +96,15 @@ const Signin = (props) => {
                 onChange={(e) => handleChange(e)}
               />
             </div>
+            <div className="mt-4">
+              <button className="btn btn-primary col-md-4" type="submit">
+                Sign in
+              </button>
+              <span className="col-md-8">
+                No account? <Link to="/signup">Sign up</Link>
+              </span>
+            </div>
 
-            <button className="btn btn-primary col-md-4" type="submit">
-              Sign in
-            </button>
-            <span className="col-md-8">
-              No account? <Link to="/signup">Sign up</Link>
-            </span>
             <div className="col-md-12">
               {error && (
                 <Alert

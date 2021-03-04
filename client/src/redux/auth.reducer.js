@@ -1,25 +1,15 @@
 import { actionTypes } from "./actions/action.types";
 
 const initialState = {
-  name: "",
-  email: "",
-  jwt: "",
+  user: {
+    name: localStorage.getItem("name") ? localStorage.getItem("name") : "",
+    email: localStorage.getItem("email") ? localStorage.getItem("email") : "",
+    jwt: localStorage.getItem("jwt") ? localStorage.getItem("jwt") : "",
+  },
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SIGNIN_SUCCESS:
-      return {
-        ...state,
-        jwt: action.payload.jwt,
-        name: action.payload.name,
-        email: action.payload.email,
-      };
-    case actionTypes.LOGOUT_USER:
-      return {
-        ...state,
-        jwt: "",
-      };
     default:
       return state;
   }

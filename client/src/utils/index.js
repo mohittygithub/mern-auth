@@ -1,14 +1,18 @@
-const TOKEN = "jwt";
+const JWT = "jwt";
+const NAME = "name";
+const EMAIL = "email";
 
-export const login = (token) => {
-  localStorage.setItem(TOKEN, token);
+export const login = (name, email, jwt) => {
+  localStorage.setItem(JWT, jwt);
+  localStorage.setItem(NAME, name);
+  localStorage.setItem(EMAIL, email);
 };
 
 export const logout = () => {
-  localStorage.removeItem(TOKEN);
+  localStorage.removeItem(JWT);
 };
 
 export const isLogin = () => {
-  if (localStorage.getItem(TOKEN)) return true;
+  if (localStorage.getItem(JWT)) return true;
   return false;
 };

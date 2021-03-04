@@ -111,12 +111,15 @@ const Signup = (props) => {
             />
           </div>
 
-          <button className="btn btn-primary col-md-4" type="submit">
-            Sign up
-          </button>
-          <span className="col-md-8 ">
-            Have an account? <Link to="/signin">Sign in</Link>
-          </span>
+          <div className="mt-4">
+            <button className="btn btn-primary col-md-4 " type="submit">
+              Sign up
+            </button>
+            <span className="col-md-8 ">
+              Have an account? <Link to="/signin">Sign in</Link>
+            </span>
+          </div>
+
           <div className="col-md-12">
             {error && (
               <Alert

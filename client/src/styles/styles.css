@@ -8,14 +8,14 @@ body {
 }
 .signup,
 .signin {
-  margin: auto;
+  margin: 50px auto;
 }
 .heading {
-  margin-bottom: 40px;
   text-align: center;
+  margin-top: 2em;
 }
 .alert {
-  margin-top: 20px;
+  margin-top: 1.2em;
 }
 form {
   max-height: 600px;
