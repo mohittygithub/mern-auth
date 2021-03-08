@@ -1,12 +1,23 @@
 import React from "react";
-import { useSelector } from "react-redux";
+//import { useDispatch, useSelector } from "react-redux";
 import "../styles/styles.css";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { logout } from "../utils/index";
+//import { redux_logout } from "../redux/actions/auth.actions";
 
 const Navbar = () => {
-  const user = useSelector((state) => state.authReducer.user);
-  console.log("user = ", user.name);
+  // const user = useSelector((state) => state.authReducer.user);
+  // const dispatch = useDispatch();
+  const history = useHistory();
+  const name = localStorage.getItem("name");
+  const email = localStorage.getItem("email");
+
+  const handleClick = () => {
+    logout();
+    // dispatch(redux_logout());
+    localStorage.getItem("jwt") === null && history.push("/signin");
+  };
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary ">
@@ -24,7 +35,7 @@ const Navbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div className="collapse navbar-collapse container">
           <div className="navbar-nav">
             <Link to="/" className="nav-item nav-link">
               Home <span className="sr-only">(current)</span>
@@ -32,18 +43,15 @@ const Navbar = () => {
             <Link to="/" className="nav-item nav-link">
               Features
             </Link>
+            <div>
+              <span className=" mr-3 navbar-text text-warning">
+                <u>{name}</u>
+              </span>
 
-            <Link to="/" className="navbar-text nav-link">
-              {user.email}
-            </Link>
-
-            <Link
-              to="/"
-              className="navbar-text nav-link"
-              onClick={() => logout()}
-            >
-              Logout
-            </Link>
+              <span className="navbar-text  text-danger" onClick={handleClick}>
+                Logout
+              </span>
+            </div>
           </div>
         </div>
       </nav>

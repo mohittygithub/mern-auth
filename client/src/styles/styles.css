@@ -33,3 +33,6 @@ form {
   background-color: rgb(255, 255, 255);
   box-shadow: 10px 10px 5px #aaaaaa;
 }
+.right-nav {
+  cursor: pointer;
+}

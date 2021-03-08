@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { Alert } from "reactstrap";
 import "../styles/styles.css";
 import signin from "../components/signin.component";
 import { login } from "../utils";
-// import { redux_login } from "../redux/actions/auth.actions";
+import { redux_login } from "../redux/actions/auth.actions";
 
 const Signin = (props) => {
   let history = useHistory();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [loginData, setLoginData] = useState({
-    email: "",
-    password: "",
+    email: "mohit@gmail.com",
+    password: "password",
   });
   const [values, setValues] = useState({ name: "", email: "", jwt: "" });
   const [error, setError] = useState("");
@@ -39,9 +39,9 @@ const Signin = (props) => {
       });
       console.log(("setValues = ", values));
       setLoginData({ email: "", password: "" });
-      // dispatch(
-      //   redux_login(response.data.jwt, response.data.name, response.data.email)
-      // );
+      dispatch(
+        redux_login(response.data.name, response.data.email, response.data.jwt)
+      );
       history.push("/");
     }
   };
@@ -96,7 +96,7 @@ const Signin = (props) => {
                 onChange={(e) => handleChange(e)}
               />
             </div>
-            <div className="mt-4">
+            <div className="mt4">
               <button className="btn btn-primary col-md-4" type="submit">
                 Sign in
               </button>

@@ -2,17 +2,26 @@ import axios from "axios";
 import { actionTypes } from "./action.types";
 
 // login action
-export const redux_login = (token, name, email) => async (dispatch) => {
+export const redux_login = (name, email, jwt) => async (dispatch) => {
   dispatch({
     type: actionTypes.SIGNIN_SUCCESS,
-    payload: { token, name, email },
+    // payload: {
+    //   name: localStorage.getItem("name"),
+    //   email: localStorage.getItem("email"),
+    //   jwt: localStorage.getItem("jwt"),
+    // },
   });
 };
 
 // logout action
-export const logout = () => async (dispatch) => {
+export const redux_logout = () => async (dispatch) => {
   dispatch({
     type: actionTypes.LOGOUT_USER,
+    payload: {
+      name: "",
+      email: "",
+      jwt: "",
+    },
   });
 };
 

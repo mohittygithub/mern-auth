@@ -6,17 +6,14 @@ import { logout } from "../utils/index";
 const Home = () => {
   let history = useHistory();
   // logout method
-  const logoutUser = (e) => {
-    e.preventDefault();
-    logout();
-    history.push("/signin");
-  };
+  // const logoutUser = (e) => {
+  //   e.preventDefault();
+  //   logout();
+  //   history.push("/signin");
+  // };
   return (
     <>
       <p>Home Page</p>
-      <Button color="danger" onClick={logoutUser}>
-        Logout
-      </Button>
     </>
   );
 };
