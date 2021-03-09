@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const uniqueValidator = require("mongoose-unique-validator");
+const validator = require("validator");
 
 const userSchema = new Schema(
   {
@@ -12,14 +12,14 @@ const userSchema = new Schema(
       type: String,
       unique: true,
       required: true,
+      validate: [validator.isEmail, "Email is invalid"],
     },
     password: {
       type: String,
       required: true,
     },
   },
-  { collection: "users" }
+  { collection: "users", timestamps: true }
 );
 
-userSchema.plugin(uniqueValidator, { message: "Email already exists" });
 module.exports = mongoose.model("User", userSchema);
