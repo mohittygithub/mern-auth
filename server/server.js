@@ -1,34 +1,35 @@
-require("dotenv").config({ path: "./config/config.env" });
-const express = require("express");
-const cors = require("cors");
-const db_connect = require("./config/db");
-const userRoutes = require("./routes/user.routes.js");
-const postRoutes = require("./routes/post.routes");
-const Post = require("./models/posts");
+require('dotenv').config({ path: './config/config.env' })
+const express = require('express')
+const cors = require('cors')
+const db_connect = require('./config/db')
+const userRoutes = require('./routes/user.routes.js')
+const postRoutes = require('./routes/post.routes')
+const Post = require('./models/posts')
 
-const app = express();
+const app = express()
 // using middleware to parse req/res in json
-app.use(express.json());
-app.use(cors());
+app.use(express.json())
+app.use(cors())
 
 // connecting to database
-db_connect();
+db_connect()
 
 // user routes
-app.use("/api/user", userRoutes);
-app.use("/api/posts", postRoutes);
+app.use('/api/user', userRoutes)
+app.use('/api/posts', postRoutes)
 
-app.get("/posts", async (req, res) => {
+app.get('/posts', async (req, res) => {
   try {
-    const response = await Post.find({});
-    res.json({ response });
-  } catch (error) {
-    res.json({ error: error.message });
-  }
-});
+    const response = await Post.find({})
 
-const PORT = process.env.PORT || 9090;
+    res.json({ response })
+  } catch (error) {
+    res.json({ error: error.message })
+  }
+})
+
+const PORT = process.env.PORT || 9090
 
 app.listen(PORT, () => {
-  console.log(`Server is listening on http://localhost:${PORT}`);
-});
+  console.log(`Server is listening on http://localhost:${PORT}`)
+})
