@@ -1,20 +1,19 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
-import { Button } from "reactstrap";
-import { logout } from "../utils/index";
+import React, { useEffect } from 'react'
+import axios from 'axios'
 
 const Home = () => {
-  let history = useHistory();
-  // logout method
-  // const logoutUser = (e) => {
-  //   e.preventDefault();
-  //   logout();
-  //   history.push("/signin");
-  // };
+  const getAllPosts = async () => {
+    const headers = {
+      'x-auth-token': localStorage.getItem('jwt'),
+    }
+    const response = await axios.get('/posts/all', headers)
+    console.log(response)
+  }
+  useEffect(() => {})
   return (
     <>
       <p>Home Page</p>
     </>
-  );
-};
-export default Home;
+  )
+}
+export default Home

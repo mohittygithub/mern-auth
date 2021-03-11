@@ -15,18 +15,8 @@ app.use(cors())
 db_connect()
 
 // user routes
-app.use('/api/user', userRoutes)
-app.use('/api/posts', postRoutes)
-
-app.get('/posts', async (req, res) => {
-  try {
-    const response = await Post.find({})
-
-    res.json({ response })
-  } catch (error) {
-    res.json({ error: error.message })
-  }
-})
+app.use('/user', userRoutes)
+app.use('/posts', postRoutes)
 
 const PORT = process.env.PORT || 9090
 

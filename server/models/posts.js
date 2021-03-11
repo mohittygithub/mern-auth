@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const postSchema = new Schema(
   {
@@ -18,12 +18,16 @@ const postSchema = new Schema(
     url: {
       type: String,
     },
+    img: {
+      data: Buffer,
+      contentType: String,
+    },
     user: {
       type: Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
     },
   },
   { timestamps: true }
-);
+)
 //postSchema.plugin(require("mongoose-autopopulate"));
-module.exports = mongoose.model("Post", postSchema);
+module.exports = mongoose.model('Post', postSchema)
