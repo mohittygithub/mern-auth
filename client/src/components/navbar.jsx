@@ -20,7 +20,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary ">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <Link to="/" className="navbar-brand">
           Navbar
         </Link>
@@ -48,7 +48,10 @@ const Navbar = () => {
                 <u>{name}</u>
               </span>
 
-              <span className="navbar-text  text-danger" onClick={handleClick}>
+              <span
+                className="navbar-text text-danger navbar-logout"
+                onClick={handleClick}
+              >
                 Logout
               </span>
             </div>

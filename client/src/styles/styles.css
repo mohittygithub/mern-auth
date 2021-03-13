@@ -36,3 +36,6 @@ form {
 .right-nav {
   cursor: pointer;
 }
+.navbar-logout {
+  cursor: pointer;
+}

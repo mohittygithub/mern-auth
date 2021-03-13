@@ -25,6 +25,7 @@ const Signin = (props) => {
     setError("");
 
     const response = await signin(loginData.email, loginData.password);
+    console.log(response.data);
     if (response.data.error) {
       setError(response.data.error);
       console.log(error);
