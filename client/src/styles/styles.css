@@ -39,3 +39,19 @@ form {
 .navbar-logout {
   cursor: pointer;
 }
+.new-post {
+  background-color: rgb(57, 82, 82);
+  height: 4em;
+  margin-bottom: 0.4em;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.post-jumbotron {
+  background-color: rgb(177, 214, 214);
+}
+.plus-sign {
+  color: white;
+  font-size: 1.4em;
+}

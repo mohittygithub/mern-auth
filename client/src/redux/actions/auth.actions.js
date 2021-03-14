@@ -1,4 +1,3 @@
-import axios from "axios";
 import { actionTypes } from "./action.types";
 
 // login action

@@ -10,7 +10,7 @@ const Navbar = () => {
   // const dispatch = useDispatch();
   const history = useHistory();
   const name = localStorage.getItem("name");
-  const email = localStorage.getItem("email");
+  // const email = localStorage.getItem("email");
 
   const handleClick = () => {
     logout();

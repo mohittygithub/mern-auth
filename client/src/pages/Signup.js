@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Alert } from "reactstrap";
 import "../styles/styles.css";
 
@@ -7,7 +7,6 @@ import signup from "../components/signup.component";
 import { Label } from "reactstrap";
 
 const Signup = (props) => {
-  let history = useHistory();
   const [signupData, setSignupData] = useState({
     name: "",
     email: "",

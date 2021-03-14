@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { Alert } from "reactstrap";
 import "../styles/styles.css";
@@ -14,7 +14,12 @@ const Signin = (props) => {
     email: "mohit@gmail.com",
     password: "password",
   });
-  const [values, setValues] = useState({ name: "", email: "", jwt: "" });
+  const [values, setValues] = useState({
+    id: "",
+    name: "",
+    email: "",
+    jwt: "",
+  });
   const [error, setError] = useState("");
   const [visible, setVisible] = useState(false);
 
@@ -34,6 +39,7 @@ const Signin = (props) => {
     if (response.data.jwt) {
       console.log(response.data);
       setValues({
+        id: response.data.id,
         name: response.data.name,
         email: response.data.email,
         jwt: response.data.jwt,
@@ -50,7 +56,7 @@ const Signin = (props) => {
   // useEffect method to capture the value of token
   useEffect(() => {
     //console.log(token)
-    login(values.name, values.email, values.jwt);
+    login(values.name, values.email, values.jwt, values.id);
     // console.log(localStorage.getItem('jwt'))
   }, [values]);
 
