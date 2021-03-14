@@ -33,48 +33,50 @@ const NewPost = () => {
   return (
     <>
       <div style={{ height: "100px" }}></div>
-
-      <form onSubmit={(e) => handleSubmit(e)} className="container col-md-6">
-        <div className="form-group">
-          <label>Title</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Enter post title"
-            value={values.title}
-            onChange={(e) => setValues({ ...values, title: e.target.value })}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Body</label>
-          <textarea
-            value={values.body}
-            onInput={(e) => setValues({ ...values, body: e.target.value })}
-            className="form-control"
-            required
-          ></textarea>
-        </div>
-        <div className="form-group">
-          <label>Tags</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Enter tags"
-            value={values.tags}
-            onChange={(e) =>
-              setValues({ ...values, tags: e.target.value.split(",") })
-            }
-            required
-          />
-          <small id="emailHelp" className="form-text text-muted">
-            Enter comma seperated words.
-          </small>
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </form>
+      <div className="jumbotron container post-jumbotron">
+        <form onSubmit={(e) => handleSubmit(e)} className="container col-md-6">
+          <h1>New Post</h1>
+          <div className="form-group">
+            <label>Title</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter post title"
+              value={values.title}
+              onChange={(e) => setValues({ ...values, title: e.target.value })}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Body</label>
+            <textarea
+              value={values.body}
+              onInput={(e) => setValues({ ...values, body: e.target.value })}
+              className="form-control"
+              required
+            ></textarea>
+          </div>
+          <div className="form-group">
+            <label>Tags</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Enter tags"
+              value={values.tags}
+              onChange={(e) =>
+                setValues({ ...values, tags: e.target.value.split(",") })
+              }
+              required
+            />
+            <small id="emailHelp" className="form-text text-muted">
+              Enter comma seperated words.
+            </small>
+          </div>
+          <button type="submit" className="btn btn-primary">
+            Submit
+          </button>
+        </form>
+      </div>
     </>
   );
 };

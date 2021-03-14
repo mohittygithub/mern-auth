@@ -38,7 +38,7 @@ const Home = () => {
     return (
       <>
         <div style={{ height: "100px" }}></div>
-        <div className="jumbotron container new-post">
+        <div className="jumbotron container post-jumbotron">
           <div className="container">
             <h1 className="display-4">No Posts To Show</h1>
             <button

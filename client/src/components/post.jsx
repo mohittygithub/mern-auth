@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/styles.css";
 import DeletePost from "./delete-post";
+import UpdatePost from "./update-post";
 
 const Post = ({ postId, title, author, body, tags, createdAt }) => {
   //console.log("tags", tags);
@@ -16,8 +17,13 @@ const Post = ({ postId, title, author, body, tags, createdAt }) => {
             <p>Created on : {createdAt}</p>
             <p>Author : {author}</p>
           </div>
-          <div className="p-2">
-            <DeletePost postId={postId} />
+          <div className="p-2 d-flex flex-column justify-content-around">
+            <div className="p-3">
+              <UpdatePost postId={postId} />
+            </div>
+            <div className="p-3">
+              <DeletePost postId={postId} />
+            </div>
           </div>
         </div>
       </div>
