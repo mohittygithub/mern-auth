@@ -1,13 +1,13 @@
 import React from "react";
-//import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "../styles/styles.css";
 import { Link, useHistory } from "react-router-dom";
 import { logout } from "../utils/index";
-//import { redux_logout } from "../redux/actions/auth.actions";
+import { isUpdate } from "../redux/actions/post.actions";
 
 const Navbar = () => {
-  // const user = useSelector((state) => state.authReducer.user);
-  // const dispatch = useDispatch();
+  //const updateButton = useSelector((state) => state.postReducer.isUpdate);
+  const dispatch = useDispatch();
   const history = useHistory();
   const name = localStorage.getItem("name");
   // const email = localStorage.getItem("email");
@@ -16,6 +16,9 @@ const Navbar = () => {
     logout();
     // dispatch(redux_logout());
     localStorage.getItem("jwt") === null && history.push("/signin");
+  };
+  const changeUpdateButton = () => {
+    dispatch(isUpdate(false));
   };
 
   return (
@@ -37,7 +40,11 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse container">
           <div className="navbar-nav">
-            <Link to="/" className="nav-item nav-link">
+            <Link
+              to="/"
+              onClick={() => changeUpdateButton()}
+              className="nav-item nav-link"
+            >
               Home <span className="sr-only">(current)</span>
             </Link>
             <Link to="/" className="nav-item nav-link">
